@@ -1,0 +1,119 @@
+﻿<div class="accountContainer">
+    <h2><span class="title">Welcome,</span>  {{ username }}.</h2>
+
+    <div class="accountEditButtons">
+        <button type="button" class="btn btn-danger accountDelete" data-toggle="modal" data-target="#exampleModal">
+            Delete Account
+        </button>
+
+        <a href="edituser">
+            <button type="button" class="btn btn-link">Change Password</button>
+        </a>
+
+    </div>
+
+
+    <div class="accountHeader">
+        <h3>Hosted Tournaments</h3>
+        <a href="addtournament">
+            <button class="btn btn-primary">Host</button>
+        </a>
+    </div>
+
+    <div class="accountSearchBox">
+        <label style="margin-right: 15px">Search</label>
+        <label>
+            <input type="text" class="form-control" ng-model="searchTextOne" placeholder="Tournament Name" />
+        </label>
+    </div>
+
+    <table class="w3-table-all">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" ng-click="orderByField = 'TournamentName'">Tournament Name</th>
+                <th scope="col" ng-click="orderByField = 'HostEmail'">Host</th>
+                <th scope="col" ng-click="orderByField = 'RankField'">Rank of</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="t in hostedTournaments | orderBy : orderByField">
+                <th scope="row">{{ $index + 1 }}</th>
+                <td>{{ t.TournamentName }}</td>
+                <td>{{ t.HostEmail }}</td>
+                <td>{{ t.RankField }}</td>
+                <td>
+                    <a href="tournamentedit/{{ t.TournamentName }}">
+                        <button class="btn btn-default edit">Edit</button>
+                    </a>
+                </td>
+                <td>
+                    <button class="btn btn-danger" ng-click="deleteTournament({ 'TournamentName': t.TournamentName, 'HostEmail': t.HostEmail })">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="accountHeader">
+        <h3>Enrolled Tournaments</h3>
+        <a href="jointournament">
+            <button class="btn btn-primary">Join</button>
+        </a>
+    </div>
+
+    <div class="accountSearchBox">
+        <label style="margin-right: 15px">Search</label>
+        <label>
+            <input type="text" class="form-control" ng-model="searchTextTwo" placeholder="Tournament Name" />
+        </label>
+    </div>
+
+    <table class="w3-table-all">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" ng-click="orderByField = 'TournamentName'">Tournament Name</th>
+                <th scope="col" ng-click="orderByField = 'HostEmail'">Host</th>
+                <th scope="col" ng-click="orderByField = 'RankField'">Rank of</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="t in enrolledTournaments | orderBy : orderByField">
+                <th scope="row">{{ $index + 1 }}</th>
+                <td>{{ t.TournamentName }}</td>
+                <td>{{ t.HostEmail }}</td>
+                <td>{{ t.RankField }}</td>
+                <td>
+                    <button class="btn btn-default edit" ng-click="leaveTournament(t.TournamentName)">Leave</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" data-backdrop="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Account Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you would like to delete this account? User data will be lost forever.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Nevermind</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteUser()">I'm Sure</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,45 @@
+﻿<div class="accountContainer">
+    <h1 class="title">Join a Tournament</h1>
+
+    <div class="searchBox">
+        
+        <h3>Available Tournaments</h3>
+
+
+        <div>
+            <label style="margin-right: 15px">Search</label>
+            <label>
+                <input type="text" class="form-control" ng-model="searchText" placeholder="Tournament Name" />
+            </label>
+        </div>
+
+    </div>
+
+    <table class="w3-table-all w3-card-4">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" ng-click="orderByField = 'TournamentName'">Tournament Name</th>
+                <th scope="col" ng-click="orderByField = 'HostEmail'">Host</th>
+                <th scope="col" ng-click="orderByField = 'RankField'">Rank of</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+        <tbody>
+            <tr ng-repeat="t in allTournaments | orderBy : orderByField">
+                <th scope="row">{{ $index + 1 }}</th>
+                <td>{{ t.TournamentName }}</td>
+                <td>{{ t.HostEmail }}</td>
+                <td>
+                    <input type="text" class="form-control" aria-label="Default" placeholder="{{ t.RankField }}"
+                        aria-describedby="inputGroup-sizing-default" ng-model="value">
+                </td>
+                <td>
+                    <button class="btn btn-success" ng-click="joinTournament(t.TournamentName, value)">Join</button> 
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

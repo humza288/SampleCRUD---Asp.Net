@@ -1,0 +1,163 @@
+﻿
+.tournamentSelection h3 {
+    color: grey !important;
+}
+
+.tournamentSelection h3:hover {
+    color: black !important;
+    
+}
+
+.dashModifiers {
+    display: flex;
+    cursor: pointer;
+    color: #0275d8;
+    background-color: #f2f2f2;
+    padding: 0 !important;
+    margin-top: 20px !important;
+    margin-bottom: 10px !important;
+    -webkit-box-shadow: 7px 7px 23px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 7px 7px 23px 0px rgba(0,0,0,0.75);
+    box-shadow: 7px 7px 23px 0px rgba(0,0,0,0.5);
+    border-radius: 10px !important;
+}
+
+    .dashModifiers h3:hover {
+        color: gray;
+    }
+
+.dashModifiers .dropdown {
+    transform: translateY(13px);
+    border-radius: 10px !important;
+    z-index: 99 !important;
+}
+
+
+.dropdown-menu {
+    transform: translateY(-50px);
+    transform: translateX(30px);
+    max-height: 300px !important;
+    overflow-y: auto;
+}
+
+.dropdown-menu li:hover {
+   background-color: lightgray !important;
+}
+
+.dashBoardContainer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: 50px !important;
+    -webkit-animation: fadeIn 2s;
+    animation: fadeIn 2s;
+}
+
+    .dashBoardContainer div {
+        padding: 20px;
+        max-width: 900px !important;
+    }
+
+        .dashBoardContainer div h1 {
+            color: black;
+            text-align: center !important;
+        }
+
+    .dashBoardContainer .firstPlace {
+        width: calc(60vw + 30px) !important;
+        background: -webkit-gradient(linear, left top, left bottom, from(#D4AF37), to(#C5A028));
+        background: linear-gradient(to bottom, #D4AF37 0%, #C5A028 100%);
+        height: 250px !important;
+        margin: 15px;
+        border-radius: 20px;
+        -webkit-box-shadow: 11px -6px 65px -9px rgba(0, 0, 0, 0.3);
+        box-shadow: 11px -6px 65px -9px rgba(0, 0, 0, 0.3);
+        -webkit-transition: 0.5s ease-in-out;
+        transition: 0.5s ease-in-out;
+        text-align: center !important;
+    }
+
+        .dashBoardContainer .firstPlace:hover {
+            -webkit-box-shadow: 11px -6px 65px -9px rgba(0, 0, 0, 0.5);
+            box-shadow: 11px -6px 65px -9px rgba(0, 0, 0, 0.5);
+        }
+
+    .dashBoardContainer .notFirstPlace {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        text-align: center !important;
+    }
+
+        .dashBoardContainer .notFirstPlace div {
+            display: -webkit-box !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            border-radius: 20px;
+            margin: 15px;
+            width: 30vw !important;
+            height: 250px !important;
+            background-color: #C0C0C0;
+            -webkit-transition: 0.5s ease-in-out;
+            transition: 0.5s ease-in-out;
+        }
+
+            .dashBoardContainer .notFirstPlace div:hover {
+                -webkit-box-shadow: 11px -6px 65px -9px rgba(0, 0, 0, 0.5);
+                box-shadow: 11px -6px 65px -9px rgba(0, 0, 0, 0.5);
+            }
+
+        .dashBoardContainer .notFirstPlace .second {
+            background: -webkit-gradient(linear, left top, left bottom, from(#C0C0C0), to(#B1B1B1));
+            background: linear-gradient(to bottom, #C0C0C0 0%, #B1B1B1 100%);
+        }
+
+        .dashBoardContainer .notFirstPlace .third {
+            background: -webkit-gradient(linear, left top, left bottom, from(#CD7F32), to(#BE7023));
+            background: linear-gradient(to bottom, #CD7F32 0%, #BE7023 100%);
+        }
+
+    .dashBoardContainer .dataTable {
+        width: 75vw;
+        margin-top: 50px;
+        margin-bottom: 100px;
+        max-width: 1000px !important;
+        color: black;
+    }
+
+        .dashBoardContainer .dataTable h1 {
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .dashBoardContainer .dataTable .tournamentName {
+            margin-bottom: 50px;
+            color: #0275d8 !important;
+        }
+
+.dashBoardContainer li:hover {
+    color: grey !important;
+}
+
+.updateTournament {
+    transform: translateX(20px);
+    float: right;
+    color: white !important
+}
+
+

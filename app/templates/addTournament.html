@@ -1,0 +1,12 @@
+﻿<div class="addTournamentContainer">
+    <form class="addTournamentForm" name="form" novalidate>
+        <h2>
+            Create a new tournament!
+        </h2>
+            <label>Name</label>
+            <input type="text" ng-model="tournament.TournamentName" class="form-control" name="tournamentName"  placeholder="Enter tournament name." required>
+            <label>Ranking Criteria</label>
+            <input type="text" ng-model="tournament.RankField" class="form-control" name="rankField" placeholder="Enter ranking criteria." required>
+        <button type="submit" ng-disabled="form.$invalid" ng-click="addTournament(user, tournament)" class="btn btn-primary">Submit</button>
+    </form>
+</div>

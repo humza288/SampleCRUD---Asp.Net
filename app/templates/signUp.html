@@ -1,0 +1,25 @@
+﻿<div class="loginContainer">
+    <div class="loginForm">
+        <h1>Sign Up!</h1>
+        <form class="form" name="frmLogin" ng-submit="signUpUser({Email: tempUser.email, Password: tempUser.passwordOne})" novalidate>
+            <input type="email" ng-model="tempUser.email" placeholder="Enter email" name="email" ng-maxlength="50" id="email" required />
+            <span class="text-danger" ng-show="(frmLogin.email.$touched || frmLogin.email.$dirty) && frmLogin.email.$invalid">
+                <span ng-show="frmLogin.email.$error.required">Email is required.</span>
+                <span ng-show="frmLogin.email.$error.email">Invalid email address.</span>
+                <span ng-show="frmLogin.email.$error.maxlength">Email is a most 50 characters.</span>
+            </span>
+            <input type="password" ng-model="tempUser.passwordOne" class="" placeholder="Enter password" name="passwordOne" ng-minlength="7">
+            <input type="password" ng-model="tempUser.passwordTwo" class="" placeholder="Verify password" name="passwordTwo" ng-minlength="7">
+            <span class="text-danger" ng-show="(frmLogin.passwordOne.$touched || frmLogin.passwordOne.$dirty || frmLogin.passwordTwo.$touched
+                  || frmLogin.passwordTwo.$dirty) && (frmLogin.passwordOne.$invalid || frmLogin.passwordTwo.$invalid)
+                  || (tempUser.passwordOne != tempUser.passwordTwo)">
+                <span ng-show="(tempUser.passwordOne != tempUser.passwordTwo) && !frmLogin.passwordOne.$error.minlength
+                      && !frmLogin.passwordTwo.$error.minlength">Passwords must match.</span>
+                <span ng-show="frmLogin.passwordOne.$error.minlength || frmLogin.passwordTwo.$error.minlength">Password too short.</span>
+            </span>
+            <button ng-disabled="frmLogin.$invalid || frmLogin.$pristine || frmLogin.passwordOne.$pristine || frmLogin.email.$pristine"  
+                    type="submit" class="btn btn-primary">Create </button>
+        </form>
+        <a class="forgot" href="login">Already have an account?</a>
+    </div>
+</div>

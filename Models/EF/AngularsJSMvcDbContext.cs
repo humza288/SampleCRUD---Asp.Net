@@ -16,10 +16,15 @@ namespace AngularJSMvc.Models.EF
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
         }
 
-        public DbSet<User> users { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Host> Hosts { get; set; }
+        public DbSet<Enrollment> Enrollments { get; set; }
+        public DbSet<Tournament> Tournaments { get; set; }
+
     }
 }

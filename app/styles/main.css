@@ -1,0 +1,60 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500&display=swap");
+
+body {
+    text-align: center;
+    padding-top: 75px;
+    font-family: 'Baloo 2', cursive;
+    overflow-x: hidden !important;
+    color: white !important;
+    background-color: black !important;
+}
+
+
+
+.navbar {
+    position: fixed !important;
+    height: 75px !important;
+    width: 100vw !important;
+    top: 0 !important;
+    font-size: 25px !important;
+    -webkit-box-shadow: 11px -6px 65px -9px rgba(0, 0, 0, 0.3);
+    box-shadow: 11px -6px 65px -9px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    margin-bottom: -20px !important;
+}
+
+    .navbar .keep {
+        color: #0275d8 !important;
+    }
+
+    .navbar .home {
+        text-decoration: none !important;
+        color: black;
+        border-right: 1px solid #0275d8;
+        padding-right: 20px;
+        margin-left: 7vw;
+        cursor: pointer;
+    }
+
+    .navbar .links {
+        margin-left: 20px !important;
+    }
+
+        .navbar .links li {
+            margin-left: 10px !important;
+            font-size: 16px !important;
+        }
+
+            .navbar .nav-link:hover {
+                color: #0275d8 !important;
+            }
+
+.w3-table-all {
+    animation: fadeIn 1s;
+}
+
+.title {
+    color: #0275d8 !important;
+}
+
+   

@@ -1,0 +1,66 @@
+﻿<div class="dashBoardContainer">
+
+    <h1 class="title">Dashboard</h1>
+
+    <div class="dashModifiers">
+        <div ng-click="toggleView()">
+            <h3 ng-show="!hosted">View Enrolled</h3>
+            <h3 ng-show="hosted">View Hosted</h3>
+        </div>
+
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ !hosted ? 'Hosted' : 'Enrolled' }} Tournaments
+            </button>
+            <div class="dropdown-menu dropdown-menu-left">
+                <ul class="list-group list-group-flush" ng-show="hosted" ng-repeat="t in enrolledTournaments | orderBy">
+                    <li ng-click="getTournamentEnrollees(t)" class="list-group-item">{{ t.TournamentName }}</li>
+                </ul>
+                <ul class="list-group list-group-flush" ng-show="!hosted" ng-repeat="t in hostedTournaments | orderBy">
+                    <li ng-click="getTournamentEnrollees(t)" class="list-group-item">{{ t.TournamentName }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="dataTable">
+        <h1><span class="tournamentName">{{ currentTournament.TournamentName }}</span> Rankings</h1>
+  
+        <table class="w3-table-all">
+        <thead>
+            <tr>
+                <th scope="col">Place</th>
+                <th scope="col">Username</th>
+                <th scope="col">Host</th>
+                <th scope="col">{{ currentTournament.RankField }}</th>
+                <th scope="col" ng-show="!hosted"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="t in tournamentEnrollees | orderBy : 'value' : true">
+                <th scope="row">{{ $index + 1 }}</th>
+                <td>{{ t.EnrolledUserId }}</td>
+                <td>{{ currentTournament.HostEmail }}</td>
+                <td>{{ t.value }}</td>
+                <td scope="col" ng-show="!hosted" >
+                    <button class="btn btn-danger" 
+                            ng-click="removeEnrollee(t.EnrolledUserId, currentTournament.TournamentName)">
+                        Remove
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+        <div class="updateTournament" ng-show="hosted">
+            <form class="form-inline">
+                <h4>Update Score</h4>
+                <div class="form-group">
+                    <input class="form-control"  ng-model="value" placeholder="{{ currentTournament.RankField }}">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2" ng-click="updateEnrollee(currentTournament.TournamentName, value)">Save</button>
+            </form>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,77 @@
+﻿.accountContainer {
+    width: 60vw !important;
+    margin-left: 20vw !important;
+    margin-top: 75px;
+}
+
+.accountContainer h1 {
+    margin-bottom: 30px;
+}
+
+.accountContainer h3 {
+}
+
+.accountHeader {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    animation: fadeIn 1s;
+}
+
+.accountHeader .btn {
+    margin-right: 1% !important;
+
+    transform: translateY(20px);
+}
+
+.accountContainer table {
+    margin-bottom: 50px;
+    background-color: #f2f2f2;
+    border-radius: 10px !important;
+    padding: 5px !important;
+    font-size: 16px;
+    color: black !important;
+}
+
+.accountContainer th {
+    cursor: pointer !important;
+}
+
+.accountContainer th:hover {
+    color: grey
+}
+
+.accountSearchBox {
+    margin-bottom: 15px !important
+}
+
+td .btn {
+    float: right;
+    margin-right: 25%;
+    border-radius: 5px !important;
+    height: 35px;
+}
+
+.accountEditButtons {
+    margin-bottom: 20px !important;
+    margin-top: 20px !important;
+}
+
+.searchBox {
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    margin-right: 15px !important;
+    padding: 15px !important;
+}
+
+    .searchBox div {
+        margin: 0px !important;
+        font-size: 18px;
+        padding-bottom: 0px !important;
+    }
+
+.searchBox h3{
+    margin: 0px !important;
+    padding-bottom: 0px !important;
+}

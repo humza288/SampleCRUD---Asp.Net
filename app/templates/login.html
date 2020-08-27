@@ -1,0 +1,21 @@
+﻿<div class="loginContainer">
+    <div class="loginForm">
+        <h1>Login!</h1>
+        <form class="form" name="frmLogin" ng-submit="login(user.email, user.password)" novalidate>
+            <input type="email" ng-model="user.email" placeholder="Enter email" name="email" ng-maxlength="50" id="email" required />
+            <span class="text-danger" ng-show="(frmLogin.email.$touched || frmLogin.email.$dirty) && frmLogin.email.$invalid">
+                <span ng-show="frmLogin.email.$error.required">Email is required.</span>
+                <span ng-show="frmLogin.email.$error.email">Invalid email address.</span>
+                <span ng-show="frmLogin.email.$error.maxlength">Email is a most 50 characters.</span>
+            </span>
+            <input type="password" ng-model="user.password" class="" placeholder="Enter password" name="password" id="pwd" ng-minlength="7">
+            <span class="text-danger" ng-show="(frmLogin.password.$touched || frmLogin.password.$dirty) && frmLogin.password.$invalid">
+                <span ng-show="frmLogin.password.$error.minlength">Password too short.</span>
+            </span>
+            <button ng-disabled="frmLogin.$invalid || frmLogin.$pristine || 
+                    frmLogin.password.$pristine || frmLogin.email.$pristine" 
+                    type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <a class="forgot" href="signup">Don't have an account?</a>
+    </div>
+</div>

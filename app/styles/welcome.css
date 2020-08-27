@@ -1,0 +1,154 @@
+﻿.welcomeContainer {
+    width: 100vw;
+    margin-top: 200px;
+}
+
+    .welcomeContainer h1 {
+        -webkit-animation: slideFromLeft 1s;
+        animation: slideFromLeft 1s;
+        font-size: 55px;
+        margin-right: 150px;
+    }
+
+    .welcomeContainer .scoreKeep {
+        margin-right: 100px;
+        -webkit-animation: slideFromLeft 1.5s;
+        animation: slideFromLeft 1.5s;
+        color: #0275d8;
+    }
+
+    .welcomeContainer .learnMore {
+        text-decoration: underline !important;
+        color: grey;
+        margin-right: 100px !important;
+        -webkit-animation: fadeIn 3s !important;
+        animation: fadeIn 3s !important;
+    }
+
+    .welcomeContainer .header {
+        text-align: right;
+    }
+
+        .welcomeContainer .header p {
+            font-size: 25px;
+            margin-right: 100px;
+        }
+
+    .welcomeContainer .details {
+        -webkit-animation: fadeIn 2s;
+        animation: fadeIn 2s;
+        text-align: left;
+        padding-top: 50px;
+        font-size: 20px;
+        -webkit-transform: translateX(120px);
+        transform: translateX(120px);
+    }
+
+    .welcomeContainer .whatNext {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
+
+        .welcomeContainer .whatNext .btn {
+            border-radius: 5px;
+            width: 150px !important;
+        }
+
+        .welcomeContainer .whatNext .doNext p {
+            font-size: 16px;
+            margin-right: 50px;
+            color: grey;
+        }
+
+.waves {
+    width: 110vw;
+    height: 15vh;
+    margin-bottom: -7px;
+    /*Fix for safari gap*/
+    min-height: 100px;
+    max-height: 150px;
+    background-color: #0275d8;
+    position: fixed;
+    bottom: 0;
+}
+
+/* Animation */
+.parallax > use {
+    -webkit-animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+    animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+
+    .parallax > use:nth-child(1) {
+        -webkit-animation-delay: -2s;
+        animation-delay: -2s;
+        -webkit-animation-duration: 7s;
+        animation-duration: 7s;
+    }
+
+    .parallax > use:nth-child(2) {
+        -webkit-animation-delay: -3s;
+        animation-delay: -3s;
+        -webkit-animation-duration: 10s;
+        animation-duration: 10s;
+    }
+
+    .parallax > use:nth-child(3) {
+        -webkit-animation-delay: -4s;
+        animation-delay: -4s;
+        -webkit-animation-duration: 13s;
+        animation-duration: 13s;
+    }
+
+    .parallax > use:nth-child(4) {
+        -webkit-animation-delay: -5s;
+        animation-delay: -5s;
+        -webkit-animation-duration: 20s;
+        animation-duration: 20s;
+    }
+
+@-webkit-keyframes move-forever {
+    0% {
+        -webkit-transform: translate3d(-90px, 0, 0);
+        transform: translate3d(-90px, 0, 0);
+    }
+
+    100% {
+        -webkit-transform: translate3d(85px, 0, 0);
+        transform: translate3d(85px, 0, 0);
+    }
+}
+
+@keyframes move-forever {
+    0% {
+        -webkit-transform: translate3d(-90px, 0, 0);
+        transform: translate3d(-90px, 0, 0);
+    }
+
+    100% {
+        -webkit-transform: translate3d(85px, 0, 0);
+        transform: translate3d(85px, 0, 0);
+    }
+}
+
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+    .waves {
+        height: 40px;
+        min-height: 40px;
+    }
+
+    .content {
+        height: 30vh;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
+

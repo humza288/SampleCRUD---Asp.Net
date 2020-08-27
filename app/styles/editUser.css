@@ -1,0 +1,9 @@
+﻿.changePassword {
+    height: 350px !important;
+}
+
+    .changePassword p {
+        font-size: 18px;
+        color: grey;
+        margin-bottom: 20px;
+    }

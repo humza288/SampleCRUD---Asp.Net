@@ -1,0 +1,90 @@
+﻿form input .ng-invalid {
+    border: 2px solid red !important;
+}
+
+.loginContainer {
+    width: 100vw;
+    height: calc(100vh - 75px);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-image: url(../assets/loginBackground.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-animation: fadeIn 1.5s;
+    animation: fadeIn 1.5s;
+    color: black !important;
+}
+
+    .loginContainer .loginForm {
+        width: 25vw;
+        height: 500px;
+        margin-top: 15vh;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 10px;
+        -webkit-box-shadow: 0px 4px 36px 3px rgba(0, 0, 0, 0.73);
+        box-shadow: 0px 4px 36px 3px rgba(0, 0, 0, 0.73);
+        -webkit-animation: slideFromTop 1.5s;
+        animation: slideFromTop 1.5s;
+    }
+
+        .loginContainer .loginForm h1 {
+            margin-bottom: 40px;
+            margin-top: 60px;
+        }
+
+        .loginContainer .loginForm form {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        .loginContainer .loginForm input {
+            width: 150%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+            border: none;
+            background-color: #f1f1f1;
+        }
+
+        .loginContainer .loginForm .forgot {
+            font-size: 14px;
+            padding-top: 25px;                    
+            align-self: center !important;
+        }
+
+        .loginContainer .loginForm .btn {
+            margin-top: 35px;
+            font-size: 25px;
+            border-radius: 10px;
+            width: 80% !important;
+        }
+
