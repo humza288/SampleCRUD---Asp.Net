@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using AngularJSMvc.Models.EF;
 using System.Diagnostics;
 using System.ComponentModel.DataAnnotations;
+using CrystalDecisions.CrystalReports.Engine;
+using System.IO;
 
 namespace AngularJSMvc.Controllers
 {
@@ -43,7 +45,7 @@ namespace AngularJSMvc.Controllers
             return Json(tournaments, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult IndexAvailableTournaments(string username)
+        public ActionResult IndexAvailableTournaments(string username)
         {
             List<Tournament> tournamentsTemp = db.Tournaments.ToList();
             List<Tournament> tournaments = new List<Tournament>();
@@ -59,7 +61,7 @@ namespace AngularJSMvc.Controllers
             return Json(tournaments, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Details(string username)
+        public ActionResult Details(string username)
         {
             Debug.WriteLine(username);
             var user = db.Users.Find(username);
@@ -71,7 +73,7 @@ namespace AngularJSMvc.Controllers
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Login(string username, string password)
+        public ActionResult Login(string username, string password)
         {
             Debug.WriteLine(username);
             var user = db.Users.Find(username);
@@ -88,7 +90,7 @@ namespace AngularJSMvc.Controllers
             return Json(null);
         }
 
-        public JsonResult EnrollTournament(string username, string tournamentName, int value)
+        public ActionResult EnrollTournament(string username, string tournamentName, int value)
         {
             var enrollment = new Enrollment();
             
@@ -103,7 +105,7 @@ namespace AngularJSMvc.Controllers
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult LeaveTournament(string username, string tournamentName)
+        public ActionResult LeaveTournament(string username, string tournamentName)
         {
             var query = db.Enrollments.Find(username, tournamentName);
 
@@ -113,13 +115,13 @@ namespace AngularJSMvc.Controllers
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetTournament(string TournamentName, string Email)
+        public ActionResult GetTournament(string TournamentName, string Email)
         {
             var query = db.Tournaments.Find(TournamentName);
             return Json(query, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult UpdateEnrollee(string username, string tournamentName, int value)
+        public ActionResult UpdateEnrollee(string username, string tournamentName, int value)
         {
             var query = db.Enrollments.Find(username, tournamentName);
             query.value = value;
@@ -130,7 +132,7 @@ namespace AngularJSMvc.Controllers
             return Json(query, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetEnrolledTournaments(string username)
+        public ActionResult GetEnrolledTournaments(string username)
         {
             var query = db.Enrollments
                             .Where(e => e.EnrolledUserId == username)
@@ -154,7 +156,7 @@ namespace AngularJSMvc.Controllers
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetTournamentEnrollees(string TournamentName)
+        public ActionResult GetTournamentEnrollees(string TournamentName)
         {
             var query = db.Enrollments
                             .Where(e => e.EnrolledTournamentName == TournamentName)
@@ -170,7 +172,7 @@ namespace AngularJSMvc.Controllers
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetHostedTournaments(string username)
+        public ActionResult GetHostedTournaments(string username)
         {
             var query = db.Tournaments
                         .Where(t => t.HostEmail == username)
@@ -188,7 +190,7 @@ namespace AngularJSMvc.Controllers
         }
 
         [HttpPost]
-        public JsonResult Create(User user)
+        public ActionResult Create(User user)
         {
             Debug.WriteLine(user.Email);
             Debug.WriteLine(user.Password);
@@ -198,7 +200,7 @@ namespace AngularJSMvc.Controllers
         }
 
         [HttpPost]
-        public JsonResult EditUser(User user)
+        public ActionResult EditUser(User user)
         {
             var tempUser = db.Users.Find(user.Email);
             tempUser.Password = user.Password;
@@ -209,7 +211,7 @@ namespace AngularJSMvc.Controllers
         }
 
         [HttpPost]
-        public JsonResult EditTournament(Tournament tournament)
+        public ActionResult EditTournament(Tournament tournament)
         {
             db.Entry(tournament).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
@@ -218,7 +220,7 @@ namespace AngularJSMvc.Controllers
 
 
         [HttpPost]
-        public JsonResult AddTournament(User user, Tournament tournament)
+        public ActionResult AddTournament(User user, Tournament tournament)
         {
             Debug.WriteLine(user.Email);
             Debug.WriteLine(user.Password);
@@ -242,7 +244,7 @@ namespace AngularJSMvc.Controllers
         }
 
         [HttpPost]
-        public JsonResult DeleteTournament(User user, Tournament tournament)
+        public ActionResult DeleteTournament(User user, Tournament tournament)
         {
             var host = db.Hosts.Find(user.Email, tournament.TournamentName);
             var query = db.Enrollments
@@ -264,7 +266,7 @@ namespace AngularJSMvc.Controllers
         }
 
         [HttpPost]
-        public JsonResult Delete(string username)
+        public ActionResult Delete(string username)
         {
             var user = db.Users.Find(username);
 
@@ -306,5 +308,42 @@ namespace AngularJSMvc.Controllers
             db.SaveChanges();
             return Json(null);
         }
+
+        public ActionResult DownloadPDF()
+        {
+
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "TournamentReport.rpt"));
+            rd.SetDataSource(db.Tournaments.Select(c => new
+            {
+                HostEmail = c.HostEmail,
+                TournamentName = c.TournamentName
+            }).ToList());
+
+            var lst = db.Tournaments.Select(c => new
+            {
+                HostEmail = c.HostEmail,
+                TournamentName = c.TournamentName
+            }).ToList();
+
+            foreach (var item in lst) {
+                Debug.WriteLine(item.HostEmail);
+            }
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+
+            rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
+            rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(5, 5, 5, 5));
+            rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            return File(stream, "application/pdf", "TournamentList.pdf");
+        }
+
     }
 }
