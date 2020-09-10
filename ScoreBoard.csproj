@@ -175,7 +175,17 @@
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\assets\loginBackground.jpg" />
-    <Content Include="app\controllers\controllers.js" />
+    <Content Include="app\controllers\userEditCtrl.js" />
+    <Content Include="app\controllers\userAddCtrl.js" />
+    <Content Include="app\controllers\userCtrl.js" />
+    <Content Include="app\controllers\signUpCtrl.js" />
+    <Content Include="app\controllers\addTournamentCtrl.js" />
+    <Content Include="app\controllers\welcomeCtrl.js" />
+    <Content Include="app\controllers\loginCtrl.js" />
+    <Content Include="app\controllers\dashboardCtrl.js" />
+    <Content Include="app\controllers\accountCtrl.js" />
+    <Content Include="app\controllers\joinTournamentCtrl.js" />
+    <Content Include="app\controllers\tournamentEditCtrl.js" />
     <Content Include="app\shared\services\dataService.js" />
     <Content Include="app\styles\account.css" />
     <Content Include="app\styles\addTournament.css" />

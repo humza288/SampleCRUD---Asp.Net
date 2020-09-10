@@ -2,9 +2,8 @@
     <h1 class="title">Join a Tournament</h1>
 
     <div class="searchBox">
-        
-        <h3>Available Tournaments</h3>
 
+        <h3>Available Tournaments</h3>
 
         <div>
             <label style="margin-right: 15px">Search</label>
@@ -12,7 +11,6 @@
                 <input type="text" class="form-control" ng-model="searchText" placeholder="Tournament Name" />
             </label>
         </div>
-
     </div>
 
     <table class="w3-table-all w3-card-4">
@@ -33,13 +31,12 @@
                 <td>{{ t.HostEmail }}</td>
                 <td>
                     <input type="text" class="form-control" aria-label="Default" placeholder="{{ t.RankField }}"
-                        aria-describedby="inputGroup-sizing-default" ng-model="value">
+                           aria-describedby="inputGroup-sizing-default" ng-model="value">
                 </td>
                 <td>
-                    <button class="btn btn-success" ng-click="joinTournament(t.TournamentName, value)">Join</button> 
+                    <button class="btn btn-success" ng-click="joinTournament(t.TournamentName, value)">Join</button>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
-
