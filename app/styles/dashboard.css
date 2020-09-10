@@ -26,11 +26,15 @@
         color: gray;
     }
 
-.dashModifiers .dropdown {
-    transform: translateY(13px);
-    border-radius: 10px !important;
-    z-index: 99 !important;
-}
+    .dashModifiers .dropdown {
+        transform: translateY(13px);
+        border-radius: 10px !important;
+        z-index: 99 !important;
+    }
+
+    .dashModifiers .report {
+        transform: translateY(13px) !important;
+    }
 
 
 .dropdown-menu {
@@ -154,8 +158,10 @@
     color: grey !important;
 }
 
+
+
 .updateTournament {
-    transform: translateX(20px);
+    transform: translateX(100px);
     float: right;
     color: white !important
 }

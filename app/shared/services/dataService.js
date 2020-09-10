@@ -220,6 +220,46 @@
                 return deferred.promise;
             };
 
+
+            service.generateTournamentsReport = function () {
+                var deferred = $q.defer();
+                $http.get('/User/GenerateTournamentsReport/', {
+                    responseType: "arraybuffer"
+                }).then(function (response) {
+                    deferred.resolve(response);
+                }, function () {
+                    deferred.reject();
+                });
+
+                return deferred.promise;
+            };
+
+            service.generateInduvidualTournamentReport = function (tournamentName) {
+                var deferred = $q.defer();
+                $http.get('/User/GenerateInduvidualTournamentReport/?TournamentName=' + String(tournamentName), {
+                    responseType: "arraybuffer"
+                }).then(function (response) {
+                    deferred.resolve(response);
+                }, function () {
+                    deferred.reject();
+                });
+
+                return deferred.promise;
+            };
+
+            service.generateUserReport = function (userName) {
+                var deferred = $q.defer();
+                $http.get('/User/GenerateUserReport/?UserName=' + String(userName), {
+                    responseType: "arraybuffer"
+                }).then(function (response) {
+                    deferred.resolve(response);
+                }, function () {
+                    deferred.reject();
+                });
+
+                return deferred.promise;
+            };
+
             return service;
         }]);
 })();

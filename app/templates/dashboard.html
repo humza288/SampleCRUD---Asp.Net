@@ -21,45 +21,54 @@
                 </ul>
             </div>
         </div>
+
+        <div class="report" ng-show="hosted">
+            <button type="submit" class="btn btn-default" ng-click="generateInduvidualTournamentReport()">Get Report</button>
+        </div>
+
     </div>
 
     <div class="dataTable">
         <h1><span class="tournamentName">{{ currentTournament.TournamentName }}</span> Rankings</h1>
-  
-        <table class="w3-table-all">
-        <thead>
-            <tr>
-                <th scope="col">Place</th>
-                <th scope="col">Username</th>
-                <th scope="col">Host</th>
-                <th scope="col">{{ currentTournament.RankField }}</th>
-                <th scope="col" ng-show="!hosted"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="t in tournamentEnrollees | orderBy : 'value' : true">
-                <th scope="row">{{ $index + 1 }}</th>
-                <td>{{ t.EnrolledUserId }}</td>
-                <td>{{ currentTournament.HostEmail }}</td>
-                <td>{{ t.value }}</td>
-                <td scope="col" ng-show="!hosted" >
-                    <button class="btn btn-danger" 
-                            ng-click="removeEnrollee(t.EnrolledUserId, currentTournament.TournamentName)">
-                        Remove
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 
-        <div class="updateTournament" ng-show="hosted">
-            <form class="form-inline">
-                <h4>Update Score</h4>
-                <div class="form-group">
-                    <input class="form-control"  ng-model="value" placeholder="{{ currentTournament.RankField }}">
-                </div>
-                <button type="submit" class="btn btn-primary mb-2" ng-click="updateEnrollee(currentTournament.TournamentName, value)">Save</button>
-            </form>
+        <table class="w3-table-all">
+            <thead>
+                <tr>
+                    <th scope="col">Place</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Host</th>
+                    <th scope="col">{{ currentTournament.RankField }}</th>
+                    <th scope="col" ng-show="!hosted"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="t in tournamentEnrollees | orderBy : 'value' : true">
+                    <th scope="row">{{ $index + 1 }}</th>
+                    <td>{{ t.EnrolledUserId }}</td>
+                    <td>{{ currentTournament.HostEmail }}</td>
+                    <td>{{ t.value }}</td>
+                    <td scope="col" ng-show="!hosted">
+                        <button class="btn btn-danger"
+                                ng-click="removeEnrollee(t.EnrolledUserId, currentTournament.TournamentName)">
+                            Remove
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="dashOptions">
+            
+
+            <div class="updateTournament" ng-show="hosted">
+                <form class="form-inline">
+                    <h4>Update Score</h4>
+                    <div class="form-group">
+                        <input class="form-control" ng-model="value" placeholder="{{ currentTournament.RankField }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2" ng-click="updateEnrollee(currentTournament.TournamentName, value)">Save</button>
+                </form>
+            </div>
         </div>
 
     </div>

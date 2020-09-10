@@ -309,41 +309,103 @@ namespace AngularJSMvc.Controllers
             return Json(null);
         }
 
-        public ActionResult DownloadPDF()
+        public ActionResult GenerateTournamentsReport()
         {
 
             ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "TournamentReport.rpt"));
-            rd.SetDataSource(db.Tournaments.Select(c => new
-            {
-                HostEmail = c.HostEmail,
-                TournamentName = c.TournamentName
-            }).ToList());
-
-            var lst = db.Tournaments.Select(c => new
-            {
-                HostEmail = c.HostEmail,
-                TournamentName = c.TournamentName
-            }).ToList();
-
-            foreach (var item in lst) {
-                Debug.WriteLine(item.HostEmail);
-            }
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "TournamentsReport.rpt"));
+            rd.SetDataSource(db.Tournaments.ToList());
 
             Response.Buffer = false;
             Response.ClearContent();
             Response.ClearHeaders();
 
-
-            rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
-            rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(5, 5, 5, 5));
-            rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
+            rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation;
 
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
 
-            return File(stream, "application/pdf", "TournamentList.pdf");
+            return File(stream, "application/pdf", "tournaments_list.pdf");
         }
 
+        [HttpGet]
+        public ActionResult GenerateInduvidualTournamentReport(string TournamentName)
+        {
+
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "InduvidualTournamentReport.rpt"));
+
+            var enrollments= db.Enrollments
+                            .Where(e => e.EnrolledTournamentName == TournamentName)
+                            .ToList();
+
+            var tournament = db.Tournaments
+                            .Where(e => e.TournamentName == TournamentName)
+                            .ToList();
+
+
+            rd.Database.Tables[0].SetDataSource(enrollments);
+            rd.Database.Tables[1].SetDataSource(tournament);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation;
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            return File(stream, "application/pdf", "tournament_report.pdf");
+        }
+
+        public ActionResult GenerateUserReport(string UserName = "sameer777@att.net")
+        {
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "UserReport.rpt"));
+
+            var enrollments = db.Enrollments
+                            .Where(e => e.EnrolledUserId == UserName)
+                            .ToList();
+
+            foreach (var i in enrollments)
+            {
+                Debug.WriteLine(i.EnrolledTournamentName);
+            }
+            
+            var hosting = db.Tournaments
+                            .Where(e => e.HostEmail == UserName)
+                            .ToList();
+
+            foreach (var i in hosting)
+            {
+                Debug.WriteLine(i.TournamentName);
+            }
+
+            var user = db.Users
+                            .Where(e => e.Email == UserName)
+                            .ToList();
+
+            foreach (var i in user)
+            {
+                Debug.WriteLine(i.Email);
+            }
+
+            rd.Database.Tables[0].SetDataSource(user);
+
+            rd.Subreports["HostedTournaments"].Database.Tables[0].SetDataSource(hosting);
+            rd.Subreports["EnrolledTournaments"].Database.Tables[0].SetDataSource(enrollments);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            //rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation;
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            return File(stream, "application/pdf", "user_report.pdf");
+        }
     }
 }

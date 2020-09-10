@@ -5,10 +5,17 @@
         <button type="button" class="btn btn-danger accountDelete" data-toggle="modal" data-target="#exampleModal">
             Delete Account
         </button>
-
-        <a href="edituser">
-            <button type="button" class="btn btn-link">Change Password</button>
-        </a>
+        
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                More
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="edituser">Change Password</a>
+                <a class="dropdown-item" href="#" ng-click="generateTournamentsReport()">Tournaments Report</a>
+                <a class="dropdown-item" href="#" ng-click="generateUserReport()">User Report</a>
+            </div>
+        </div>
 
     </div>
 

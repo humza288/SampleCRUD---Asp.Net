@@ -7,7 +7,7 @@
             console.log("At the welcome screen");
 
         }])
-        .controller('dashboardCtrl', ['$scope', '$rootScope', '$filter', 'dataService', function ($scope, $rootScope, $filter, dataService) {
+        .controller('dashboardCtrl', ['$scope', '$rootScope', '$filter', '$window' ,'dataService', function ($scope, $rootScope, $filter, $window, dataService) {
             console.log("At the dashboard screen");
 
             $scope.hosted = true;
@@ -89,8 +89,31 @@
                 })
             }
 
+        
+
+            $scope.generateInduvidualTournamentReport = function () {
+                dataService.generateInduvidualTournamentReport($scope.currentTournament.TournamentName).then(function (result) {
+
+                    var blob = new Blob([result.data], { type: 'application/pdf' });
+                    var downloadLink = angular.element('<a></a>');
+                    var url = $window.URL || $window.webkitURL;
+
+                    downloadLink.attr('href', url.createObjectURL(blob));
+                    downloadLink.attr('download', 'tournamentReport');
+                    downloadLink[0].click();
+
+                    console.log('Generated tournament report.');
+                    toastr.success('Generated tournament report.');
+
+                    }, function () {
+                        console.log('Error in generating report.');
+                        toastr.error('Error in generating report.');
+                        return {};
+                });
+            }
+
         }])
-        .controller('accountCtrl', ['$scope', '$rootScope', '$filter', 'dataService', function ($scope, $rootScope, $filter, dataService) {
+        .controller('accountCtrl', ['$scope', '$rootScope', '$filter', '$window' , 'dataService', function ($scope, $rootScope, $filter, $window, dataService) {
             console.log("At the account screen");
 
             $scope.orderBy = 'TournamentName';
@@ -157,6 +180,47 @@
                     console.log('Error in leaving tournament.');
                     toastr.error('Error in leaving tournament.');
                     return {};
+                })
+            }
+
+            $scope.generateTournamentsReport = function () {
+                dataService.generateTournamentsReport().then(function (result) {
+
+                    var blob = new Blob([result.data], { type: 'application/pdf' });
+                    var downloadLink = angular.element('<a></a>');
+                    var url = $window.URL || $window.webkitURL;
+
+                    downloadLink.attr('href', url.createObjectURL(blob));
+                    downloadLink.attr('download', 'tournamentsReport');
+                    downloadLink[0].click();
+
+                    console.log('Generated tournament report.');
+                    toastr.success('Generated tournament report.');
+
+                }, function () {
+                    console.log('Error in generating report for all tournaments.');
+                    toastr.error('Error in generating report for all tournaments.');
+                })
+            }
+
+
+            $scope.generateUserReport = function () {
+                dataService.generateUserReport($rootScope.username).then(function (result) {
+
+                    var blob = new Blob([result.data], { type: 'application/pdf' });
+                    var downloadLink = angular.element('<a></a>');
+                    var url = $window.URL || $window.webkitURL;
+
+                    downloadLink.attr('href', url.createObjectURL(blob));
+                    downloadLink.attr('download', 'userReport');
+                    downloadLink[0].click();
+
+                    console.log('Generated user report.');
+                    toastr.success('Generated user report.');
+
+                }, function () {
+                    console.log('Error in generating report for user.');
+                    toastr.error('Error in generating report for user.');
                 })
             }
 
@@ -307,31 +371,11 @@
                     }
                 });
             };
-
-            /*$scope.signUpUser = function (user) {
-                console.log("Processing Signup: ");
-
-                dataService.addUser(user).then(function () {
-                    $rootScope.signedIn = true;
-                    $rootScope.username = user.Email;
-                    $rootScope.password = user.Password;
-                    $rootScope.storeUserCookie();
-                    $rootScope.goHome();
-                    toastr.success('User Created: ' + $rootScope.username + '.');
-                }, function () {
-                    toastr.error('Error in creating user');
-                    toastr.error('Error in creating user.');
-                });
-            }*/
         }])
         .controller('userCtrl', ['$scope', '$rootScope', '$filter', 'dataService', function ($scope, $rootScope, $filter, dataService) {
             $scope.users = [];
             $scope.currentPage = 1;
             $scope.itemsPerPage = 2;
-
-            console.log($rootScope.signedIn);
-
-            //getData();
 
             function getData() {
                 dataService.getUsers().then(function (result) {
